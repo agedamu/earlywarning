@@ -55,12 +55,6 @@ function addDataToMap(data, map) {
     dataLayer.addTo(map);
 }
 
-//$.getJSON("http://satellite.mediagis.com/?s=39404", function(data) { 
-//	$(data.features).each(function(index, value) {
-//		console.log('It worked!'); 
- //   }
-//});
-
 loadSatdata = function(){
 	$.ajax({
 	    url: "http://satellite.mediagis.com/?s=39404", 
