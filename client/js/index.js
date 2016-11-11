@@ -1,30 +1,27 @@
-var shipLayer = L.layerGroup();
-var ships = L.icon({
+var cubesatLayer = L.layerGroup();
+var cubesat = L.icon({
     iconUrl: 'http://deepspaceindustries.com/wp-content/uploads/2015/08/DSI-Firefly_Shorter-Tenna-500.png',
     iconSize: [80, 60]
 });
 var map = L.map('map', { zoomControl:false }), 
-    realtime = L.realtime({
-        url: 'http://satellite.mediagis.com/?s=39404',
-        crossOrigin: true,
-        type: 'json'
-    }, {
-        interval: 3 * 1000,
-        getFeatureId: function(featureData){
-    	return featureData.properties.mmsi;
-       },
-    pointToLayer: function (feature, latlng) {
-      marker = L.marker(latlng, {icon: ships});
-      marker.bindPopup('mmsi: ' + feature.properties.mmsi +
-                       '<br/> course:' + feature.properties.hdg+
-                       '<br/> speed:' + feature.properties.sog);
-      marker.addTo(shipLayer);
-      return marker;
-    }
-    
-
-
-    }).addTo(map);
+  realtime = L.realtime({
+      url: 'http://satellite.mediagis.com/?s=39404',
+      crossOrigin: true,
+      type: 'json'
+  }, {
+      interval: 3 * 1000,
+      getFeatureId: function(featureData){
+  	return featureData.properties.mmsi;
+     },
+  pointToLayer: function (feature, latlng) {
+    marker = L.marker(latlng, {icon: cubesat});
+    marker.bindPopup('mmsi: ' + feature.properties.mmsi +
+                     '<br/> course:' + feature.properties.hdg+
+                     '<br/> speed:' + feature.properties.sog);
+    marker.addTo(cubesatLayer);
+    return marker;
+  }    
+}).addTo(map);
 
 
 //base map layer
@@ -75,8 +72,7 @@ loadSatdata = function(){
                 };
                 $satContainer.fadeOut("slow", null, satView); 
 
-                //Write Cubesat Telemetry to page
-                  
+                //Write Cubesat Telemetry to page         
 	    	});
 	    }
 	});
